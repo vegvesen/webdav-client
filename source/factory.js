@@ -37,6 +37,8 @@ const stats = require("./interface/stat.js");
  * @param {String} remoteURL The remote address of the webdav server
  * @param {String=} username Optional username for authentication
  * @param {String=} password Optional password for authentication
+ * @param {Object=} headers Optional headers
+ * @param {String=} headers.Authorization Auth headers for fetch
  * @returns {ClientInterface} A new client interface instance
  * @module WebDAV
  * @example
@@ -48,9 +50,9 @@ const stats = require("./interface/stat.js");
  *          console.log(contents);
  *      });
  */
-function createClient(remoteURL, username, password) {
+function createClient(remoteURL, username, password, headers) {
     const baseOptions = {
-        headers: {},
+        headers: Object.assign({}, headers),
         remotePath: urlTools.extractURLPath(remoteURL),
         remoteURL: remoteURL
     };
